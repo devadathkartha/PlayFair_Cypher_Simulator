@@ -9,4 +9,4 @@ We have attached screenshots from the webapp that we have built.
 ![dashboard](https://github.com/devadathkartha/PlayFair_Cypher_Simulator/assets/149815290/1b69d5e4-3d12-447c-9198-f7fd2d061952)
 ![functional_page](https://github.com/devadathkartha/PlayFair_Cypher_Simulator/assets/149815290/9b1d7616-d5db-452f-9a22-bcee14637312)
 ![modal1_cycle_steps](https://github.com/devadathkartha/PlayFair_Cypher_Simulator/assets/149815290/3d8fdc54-a6b3-433c-b0ae-f9475c0ee6af)
-![Uploading modal2_history.png…]()
+![modal2_history](https://github.com/devadathkartha/PlayFair_Cypher_Simulator/assets/149815290/6bca7c23-43f3-4496-a99a-adfca9f086cf)
