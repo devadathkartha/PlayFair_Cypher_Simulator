@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Playfair Cipher Simulator</title>
+<link rel="stylesheet" href="main_style.css">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Nabla&display=swap');
+
+
+    body {
+        
+        background-image: url('Background_Image_web_page.jpg');
+        background-size: cover;
+        background-position: center center;
+        background-color: #001219;
+        margin: 0;
+        padding: 0;
+    }
+
+    #app {
+        background-image: url('In_App_Image.jpg');
+        width: 50%;
+        max-width: 90%;
+        max-height: 80%;
+        margin-top: 3%;
+        background-color: #ccd5ae;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 50px;
+        font-family: 'BlackDrama',sans-serif;
+        color: #333;
+    }
+
+    label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"] {
+        width: 40%;
+        padding: 8px;
+        margin-bottom: 10px;
+        
+        margin-left: 32%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+   
+
+    button {
+        display: inline;
+        width: 35%;
+        height:50px;
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 3px;
+        margin-right: 20px;
+        background-color: #001219;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    #result {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #f8f9fa;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    /* CSS to style the grid container */
+    #grid {
+        position: relative;
+        left: 35%;
+        width: 25%;
+        height: 20%;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        row-gap: 0;
+        column-gap: 0; /* Remove spacing between grid items */
+        justify-content: center;
+        
+        padding: 10px;
+    }
+
+    /* CSS to style each grid item */
+    .grid-item {
+        
+        width:20px;
+        height:20px;
+        background-color: aliceblue;
+        border-radius: 10px;
+        text-align: center;
+        padding: 10px; /* Adjust padding as needed */
+        margin: 4px;
+        width: 50px; /* Adjust width of grid items */
+        height: 50px; /* Adjust height of grid items */
+        line-height: 50px; /* Center-align text vertically */
+    }
+
+
+    /* Animation */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    .fadeIn {
+        animation: fadeIn 0.5s ease;
+    }
+</style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-brand">CIPHERIFY</div>
+        <ul class="nav-links">
+            <li><a href="https://en.wikipedia.org/wiki/Playfair_cipher">Rules</a></li>
+            <li><a href="https://www.nku.edu/~christensen/1402%20Playfair%20cipher.pdf">History</a></li>
+            <li><a href="https://intellipaat.com/blog/playfair-cipher/">More</a></li>
+            <li><a href="index.html">Sign Out</a></li>
+        </ul>
+    </nav>
+
+
+
+    <!------------------------THE INPUT PART   ----------------------------------->
+    <div class="appjus">
+        <div id="app" class="fadeIn">
+            <h1>Playfair Cipher Simulator</h1>
+            <div id="pltx">
+                <label for="plaintext" style="font-size: 22px;font-family: 'BlackDrama',sans-serif;">.Enter Text</label>
+                <input type="text" placeholder="Enter the plaintext here !" id="plaintext">
+            </div>
+            <div id="keph">   
+                <label for="key" style="font-size: 22px;font-family: 'BlackDrama',sans-serif;">.Enter Key Phrase</label>
+                <input type="text"placeholder="Enter the key phrase !" id="key" style="margin-left: 24%;">
+            </div>
+            <div id="plchld">   
+                <label for="key" style="font-size: 22px;font-family: 'BlackDrama',sans-serif;margin-left:3%;">.Enter Placeholder</label>
+                <input type="text"placeholder="Placeholder letter here  (type x as default)" id="plchldva" style="width: 40%;margin-left: 25%;position: relative;left:2%">
+            </div>
+            <div id="replacdlet">   
+                <label for="key" style="font-size: 22px;font-family: 'BlackDrama',sans-serif;margin-left: 2.4%;">.Replacing Letter</label>
+                <input type="text"placeholder="Letter replacing  (type i as default)" id="replacedlet" style="position: relative;right: 3% ;">
+            </div>
+            <div id="replaclet">   
+                <label for="key" style="font-size: 22px;font-family: 'BlackDrama',sans-serif;margin-left: 3.6%;position: relative;right: 4.3%;">.Replaced Letter</label>
+                <input type="text"placeholder="Letter being replaced  (type j as default)" id="replacelet" style="margin-left: 10%;position: relative;left: 11%;">
+            </div>
+            <div class="buttonsf">
+                <button onclick="encrypt()">Encrypt</button>
+                <button onclick="decrypt()">Decrypt</button>
+            </div>
+            <div class="stepbutton">
+                <button onclick="viewSteps()">View Steps</button>
+                <button onclick="viewHistory()">View History</button> 
+            </div>
+            
+            <div class="res">
+                <div id="result" style="background-color: #001219;color: #fdfbfb;"></div>
+            </div>
+        
+            
+        </div>
+    </div>
+
+<!-----------------------------------Modal overlay------------------->
+<div id="modal" class="modal-overlay">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <div id="grid" style="background-color: #ccd5ae; color: #001219; font-size: 30px;"></div>
+        <div id="step-container"></div>
+        <div class="info">
+            <div id="stepinfo"></div>
+            <div id="changeinfo"></div>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="prevStep()">&lt;</button>
+            <button onclick="nextStep()">&gt;</button>
+        </div>
+        <div id="stpno">
+            <label for="stepnumber" style="font-family: Georgia, 'Times New Roman', Times, serif;margin-right: 3%;">Step Number to Visit</label>
+            <input type="number" placeholder="Enter the step number here !" id="stepnumber">
+            
+        </div>
+        <div id="gobut">
+            <button onclick="goToStep()">GO</button>
+        </div>
+        
+    </div>
+</div>
+
+<!-------------------------MODAL 2-->
+<div id="modal2" class="modal2-overlay">
+    <div class="modal2-content">
+        <span class="close-btn2" onclick="closeModal2()">&times;</span>
+        <p>Text History</p>
+        <div id="grid" style="background-color: #ccd5ae; color: #001219; font-size: 30px;"></div>
+        <div class="modal2-content">
+            <div id="contentDiv" style="font-family: Georgia, 'Times New Roman', Times, serif;font-weight: 700;"></div> 
+        </div>
+    </div>
+</div>
+
+
+<script src="main_script.js"></script>
+</body>
+</html>
